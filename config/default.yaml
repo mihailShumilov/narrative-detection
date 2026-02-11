@@ -1,0 +1,177 @@
+# Solana Narrative Detector - Configuration
+# ==========================================
+
+analysis:
+  # Current analysis window
+  window_days: 14
+  # Baseline comparison window (prior period)
+  baseline_days: 56
+  # Max narratives to output
+  max_narratives: 10
+  # Min narratives to output
+  min_narratives: 5
+
+scoring:
+  weights:
+    velocity: 0.25
+    breadth: 0.20
+    cross_domain: 0.20
+    novelty: 0.20
+    credibility: 0.15
+  penalties:
+    spam: 0.10
+    single_source: 0.15
+  thresholds:
+    min_events: 3
+    min_sources: 2
+    spam_similarity: 0.85
+    single_source_dominance: 0.70
+
+sources:
+  onchain:
+    solana_rpc:
+      endpoint: "https://api.mainnet-beta.solana.com"
+      # Alternative: use env SOLANA_RPC_URL
+      rate_limit_rps: 5
+      enabled: true
+    # Helius API for enriched data (optional, needs API key)
+    helius:
+      enabled: false
+      # Set HELIUS_API_KEY env var
+
+  offchain:
+    github:
+      enabled: true
+      # Set GITHUB_TOKEN env var for higher rate limits
+      rate_limit_rps: 10
+      search_queries:
+        - "solana language:rust"
+        - "solana language:typescript"
+        - "anchor framework solana"
+        - "solana program library"
+        - "solana validator"
+        - "solana defi"
+      orgs:
+        - "solana-labs"
+        - "coral-xyz"
+        - "jito-foundation"
+        - "marinade-finance"
+        - "orca-so"
+        - "raydium-io"
+        - "drift-labs"
+        - "marginfi"
+        - "tensor-hq"
+        - "helium"
+        - "metaplex-foundation"
+        - "squads-protocol"
+        - "phoenix-trade"
+
+    twitter:
+      enabled: true
+      # Requires TWITTER_BEARER_TOKEN env var
+      # Falls back to Nitter RSS if unavailable
+      kol_handles:
+        - "aaboronin"
+        - "aaboronin_sol"
+        - "0xMert_"
+        - "aaboronin"
+        - "taboronin"
+        - "rajgokal"
+        - "armaboronin"
+        - "heaboronin"
+        - "bufalu"
+        - "solaboronin"
+        - "0xMert_"
+        - "aeyakovenko"
+        - "therealchaseeb"
+        - "Austin_Federa"
+        - "JupiterExchange"
+        - "marginaboronin"
+        - "DriftProtocol"
+        - "jaboronin"
+        - "tensor_hq"
+        - "orca_so"
+        - "GenesysGo"
+        - "heaboronin"
+        - "Jito_Sol"
+        - "solaboronin"
+        - "SolanaFndn"
+        - "solana"
+        - "metaplex"
+        - "phantom"
+        - "helaboronin"
+        - "squaboronin"
+      keyword_queries:
+        - "solana"
+        - "#solana"
+        - "SOL ecosystem"
+        - "solana defi"
+        - "solana nft"
+        - "solana validator"
+        - "solana blinks"
+        - "solana actions"
+        - "solana compressed nft"
+        - "solana token extensions"
+        - "solana mobile"
+        - "solana ai"
+
+    rss_blogs:
+      enabled: true
+      feeds:
+        - url: "https://solana.com/news/rss.xml"
+          name: "Solana Foundation Blog"
+          category: "official"
+        - url: "https://www.helius.dev/blog/rss.xml"
+          name: "Helius Blog"
+          category: "infra"
+        - url: "https://jito-foundation.gitbook.io/mev/rss"
+          name: "Jito MEV"
+          category: "mev"
+        - url: "https://medium.com/feed/@solana"
+          name: "Solana Medium"
+          category: "official"
+        - url: "https://blog.orca.so/feed"
+          name: "Orca Blog"
+          category: "defi"
+
+entity_aliases:
+  # Map aliases to canonical names
+  "anchor": ["anchor-lang", "coral-xyz/anchor", "project-serum/anchor"]
+  "metaplex": ["metaplex-foundation", "@metaplex"]
+  "jupiter": ["jup", "jupiter exchange", "jupiterexchange"]
+  "marinade": ["marinade-finance", "mnde", "msol"]
+  "jito": ["jito-foundation", "jito-sol", "jitosol"]
+  "drift": ["drift-labs", "drift protocol", "driftprotocol"]
+  "tensor": ["tensor-hq", "tensor_hq"]
+  "helius": ["helius-labs", "helius.dev"]
+  "orca": ["orca-so", "orca.so"]
+  "raydium": ["raydium-io"]
+  "phantom": ["phantom wallet"]
+  "squads": ["squads-protocol", "squads multisig"]
+  "helium": ["helium network", "hnt"]
+  "compressed-nfts": ["cnft", "cNFT", "compressed nfts", "state compression", "compressed nft", "state-compression", "compressed-nft"]
+  "token-extensions": ["token-2022", "token 2022", "token22", "token extensions", "token-extensions"]
+  "blinks": ["blockchain links", "solana actions"]
+  "ai-agents": ["solana-ai", "solana ai", "ai agent", "ai agents", "ai-agent"]
+  "depin": ["decentralized physical", "depin"]
+  "solana-defi": ["solana defi"]
+  "firedancer": ["firedancer", "frankendancer"]
+  "svm": ["solana virtual machine", "svm"]
+
+idea_generation:
+  ideas_per_narrative: 5
+  categories:
+    - "infrastructure"
+    - "developer_tooling"
+    - "analytics"
+    - "consumer_app"
+    - "protocol"
+
+logging:
+  level: "INFO"
+  format: "structured"
+
+cache:
+  enabled: true
+  directory: "./data/cache"
+  ttl_hours: 336  # 14 days

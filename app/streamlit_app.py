@@ -474,7 +474,7 @@ def main():
         st.markdown("- RSS/Blogs (ecosystem content)")
         st.markdown("---")
         st.markdown(
-            "[GitHub Repo](https://github.com/example/narrative-detection) | "
+            "[GitHub Repo](https://github.com/mihailShumilov/narrative-detection) | "
             "Built for Solana Hackathon 2026"
         )
 

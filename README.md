@@ -2,6 +2,8 @@
 
 **Detect emerging narratives and early signals in the Solana ecosystem. Refreshes every 14 days.**
 
+> **[Live Demo](https://solana-narrative-detection.streamlit.app/)** — try it now, no setup required.
+
 A signal-driven system that ingests onchain and offchain data, extracts candidate narratives, scores and ranks them by strength/novelty, explains WHY each narrative is detected, and generates 3-5 concrete build ideas per narrative.
 
 Built for **founders, investors, and ecosystem teams** who need to translate signals into actionable opportunities.
@@ -10,11 +12,15 @@ Built for **founders, investors, and ecosystem teams** who need to translate sig
 
 ## Quick Start
 
+### Live demo
+
+**https://solana-narrative-detection.streamlit.app/**
+
 ### One-command local run
 
 ```bash
 # Clone and install
-git clone <repo-url> && cd narrative_detection
+git clone https://github.com/mihailShumilov/narrative-detection.git && cd narrative-detection
 pip install -r requirements.txt
 
 # Run the pipeline (fetches live data + merges bundled snapshot)
